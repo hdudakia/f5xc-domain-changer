@@ -1,6 +1,3 @@
 parser.exclude
 parser2.exclude
-parser44.exclude
-parser55.exclude
-parser66.exclude
-parser77.exclude
+parser100.exclude
