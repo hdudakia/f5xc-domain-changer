@@ -1,5 +1,4 @@
 import sys
-import os
 import requests
 from difflib import unified_diff
 
@@ -10,10 +9,8 @@ def get_lb_json(api_url, api_token):
     return response.json()
 
 def modify_json(data, domains_file):
-    # Access the value of the environment variable
-    domains_file_path = os.getenv(domains_file, domains_file)
-
-    with open(domains_file_path, 'r') as file:
+    print(f"DEBUG: domains_file = {domains_file}")  # Add this line for debug
+    with open(domains_file, 'r') as file:
         domains = [line.strip() for line in file.readlines()]
 
     data['spec']['domains'] = domains
@@ -51,4 +48,3 @@ if __name__ == "__main__":
 
     # Print the differences
     print_domain_diff(original_domains, modified_data['spec']['domains'])
-
