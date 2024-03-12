@@ -6,23 +6,19 @@ on:
       - main
 
 jobs:
-  run_script:
+  modify_domain:
     runs-on: ubuntu-latest
 
+    env:
+      API_URL: ${{ secrets.API_URL }}
+      API_TOKEN: ${{ secrets.API_TOKEN }}
+      DOMAINS_FILE: ${{ secrets.DOMAINS_FILE }}
+
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.x
-
-    - name: Install Dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r .github/workflows/requirements.txt
-
-    - name: Run Python Script
-      run: python parser.py ${{ secrets.API_URL }} ${{ secrets.API_TOKEN }} ${{ secrets.DOMAINS_FILE }}
+      - name: Run Python Script
+        run: |
+          python parser.py "$API_URL" "$API_TOKEN" "$DOMAINS_FILE"
 
