@@ -1,5 +1,4 @@
 import sys
-import yaml
 import requests
 from difflib import unified_diff
 
